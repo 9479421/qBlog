@@ -1,4 +1,6 @@
-<h1 style='text-align:center'>qBlog个人博客</h1>
+<div align="center">
+    <h1> qBlog </h1>
+</div>
 
 ## 实际部署
 
