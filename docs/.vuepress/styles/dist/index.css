@@ -1,0 +1,73 @@
+.bar {
+  --nprogress-color: rgb(0, 176, 255);
+  --nprogress-z-index: 1031;
+}
+
+.back-to-top {
+  --back-to-top-z-index: 5;
+  --back-to-top-color: rgb(0, 176, 255);
+  --back-to-top-color-hover: rgb(0, 81, 255);
+}
+
+.theme-container.home-page-class .theme-default-content:not(.custom) {
+  max-width: none;
+  margin: 0 auto;
+}
+.theme-container.home-page-class blockquote p {
+  font-size: 28px;
+  color: #000;
+  font-weight: bold;
+}
+
+.home-page-class blockquote p {
+  font-size: 28px;
+  color: #000;
+  font-weight: bold;
+}
+
+body blockquote p {
+  color: #000;
+}
+
+html.dark blockquote p {
+  color: #fff;
+}
+
+blockquote {
+  border-left: 0.8rem solid #20affc;
+}
+
+a {
+  color: #20affc;
+}
+
+.navbar-item > a:hover,
+.navbar-item > a.router-link-active {
+  margin-bottom: -2px;
+  border-bottom: 4px solid #20affc;
+}
+
+.navbar-items a:hover,
+.navbar-items a.router-link-active {
+  color: #20affc;
+}
+
+.navbar-dropdown-wrapper .navbar-dropdown-title-mobile:hover {
+  color: #20affc;
+}
+
+.navbar-dropdown-wrapper .navbar-dropdown .navbar-dropdown-item a:hover {
+  color: #20affc;
+}
+
+.navbar-dropdown-wrapper .navbar-dropdown .navbar-dropdown-item a.router-link-active {
+  color: #20affc;
+}
+
+.theme-container.work-page-class .theme-default-content:not(.custom) {
+  max-width: 800px;
+}
+
+:root {
+  --c-brand:rgb(32, 175, 252);
+}

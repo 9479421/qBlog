@@ -1,0 +1,1 @@
+const e={key:"v-6e47a6a6",path:"/view/note/%E5%85%B6%E4%BB%96/CSDN%E8%BD%AC%E4%B8%BAMarkdown.html",title:"CSDN\u8F6C\u4E3AMarkdown",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{},filePathRelative:"view/note/\u5176\u4ED6/CSDN\u8F6C\u4E3AMarkdown.md"};export{e as data};

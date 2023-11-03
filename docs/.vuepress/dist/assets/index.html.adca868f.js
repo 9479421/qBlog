@@ -1,0 +1,1 @@
+const e={key:"v-23d31b0d",path:"/view/work/",title:"",lang:"zh-CN",frontmatter:{pageClass:"work-page-class"},excerpt:"",headers:[{level:2,title:"\u4F5C\u54C1\u5C55\u793A(\xB4\u25BD`\u0283\u2661\u01AA)",slug:"\u4F5C\u54C1\u5C55\u793A-\u25BD-\u0283\u2661\u01AA",children:[]}],git:{},filePathRelative:"view/work/README.md"};export{e as data};

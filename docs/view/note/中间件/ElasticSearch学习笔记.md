@@ -1,0 +1,776 @@
+# ElasticSearch学习笔记
+
+## 一、聊聊Doug Cutting
+
+一位名叫Doug Cutting的美国工程师，做了一个用于文本搜索的函数库（姑且理解为软件的功能组件），命名为Lucene。
+Lucene是用JAVA写成的，目的是为各种中小型应用软件加入全文检索功能。因为好用而且开源（代码公开），非常受程序员们的欢迎！
+
+> 回到主题
+
+Lucene是一套**信息检索工具包**！jar包！**不包含**搜索引擎系统！
+包含的：索引结构！读写索引的工具！排序、搜索规则等功能（工具类！）
+Lucene和Elasticsearch关系：ElasticSearch是基于Lucene做了一些封装和增强（我们上手是十分简单！）
+
+## 二、ElasticSearch概述
+
+ElasticSearch(简称为es)是一个开源的**高扩展**的**分布式全文检索引擎**，它可以近乎 **实时存储、检索数据**；
+本身扩展性很好，可以扩展到上百台服务器，处理PB级别（大数据时代）的数据。
+es是使用java开发并使用Lucene作为其核心来实现所有索引和搜索的功能，但是它的目的是通过简单的**REST-ful**的API来隐藏Lucene的复杂性，从而让全文搜索变得简单。
+
+## 三、Solr和ElasticSearch的区别
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyeb6cf94e-e6fe-4351-bfa0-e0365eed5646.png)
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyfb3ca458-82d1-4a0e-b8bd-8c39b252901b.png)
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyee3bb195-d2ff-4b64-9cad-9025b8838fd7.png)
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudycb6bdfec-ea1d-4185-9aa4-91c92e49d712.png)
+
+### ElasticSearch和Solr区别总结
+
+1. es基本是开箱即用（解压就可以用），非常简单。Solr安装略微复杂一丢丢。
+2. Solr利用Zookeeper进行分布式管理，而Elasticsearch自身带有分布式协调管理功能。
+3. Solr支持更多格式的数据，比JSON、XML、CSV，而Elasticsearch仅支持json文件格式。
+4. Solr官方提供的功能更多，而Elasticsearch本身更注重于核心功能，高级功能多有第三方插件提供，例如图形化界面需要kibana友好支撑。
+5. Solr查询快，但更新索引时慢（即插入删除慢），用于电商等查询多的应用；
+   - ES建立索引快（即查询慢），即实时性查询快，用于facebook新浪等搜索。
+   - Solr是传统搜索应用的有力解决方案，但Elasticsearch更适用于新兴的实时搜索应用。
+6. Solr比较成熟，有一个更大，更成熟的用户、开发和贡献者社区，而Elasticsearch相对开发维护者较少，更新太快，学习使用成本较高。
+
+## 四、ElasticSearch安装
+
+```
+最低要求jdk1.8
+```
+
+最新版本下载地址：https://www.elastic.co/cn/downloads/enterprise-search
+
+其他版本下载地址：https://www.elastic.co/cn/downloads/past-releases#elasticsearch
+
+### windows下安装
+
+解决问题：http://www.javacui.com/tool/669.html
+
+1. 解压就可以使用了
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyb82dbac7-9dc6-4000-ac28-d7e1bb8d685d.png)
+
+2. 熟悉目录
+
+   ```java
+   bin：启动文件
+   config：配置文件     
+   log4j2：日志配置文件     
+   jvm.options：java虚拟机相关的配置     
+   elasticsearch.yml：elasticsearch的配置文件！默认9200端口！跨域！
+   lib：相关jar包
+   logs：日志
+   modules：功能模块
+   plugins：插件！
+   ```
+
+3. 启动（点击bin文件夹下的elasticsearch.bat），访问9200端口
+   访问可能会报错或需要输入密码，启动前需要配置elasticsearch.yml：
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyf8f9e334-a9c0-449e-81db-ede59c0255e3.jpg)
+
+   ```
+   # 启动时会去更新地图的一些数据库，这里直接禁掉即可，用到时再说.ingest.geoip.downloader.enabled: false
+   ```
+
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy75ec1563-4b52-4b35-8774-df7b2bb4485e.png)
+
+4. 访问测试（localhost:9200）
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy1ee4d3cc-0620-41fe-bfce-8b90dfbd53e3.png)
+
+### 安装es可视化界面：head的插件
+
+没有前端基础的，先去看狂神的Vue教程，把基本的环境安装完毕！
+狂神Vue教程地址：https://www.bilibili.com/video/BV18E411a7mC
+
+1. head插件下载地址：https://github.com/mobz/elasticsearch-head/
+
+2. 启动head插件，访问9100端口
+
+   ```
+   # 安装cnpm的命令npm install -g cnpm -registry=https://registry.npm.taobao.org# cnpm下载资源更快cnpm installnpm run start
+   ```
+
+   如果cnpm不能使用，需要设置：
+
+   1. windows系统搜索Windows PowerShell，以管理员的权限打开。
+   2. 输入set-ExecutionPolicy RemoteSigned，点击回车。
+   3. 输入A（选择A），回车。
+   4. 重新回到项目就可以使用cnpm密令。
+
+3. 连接测试发现跨域问题
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy5a8b4c14-cded-4a3f-9034-6d23a13e201e.png)
+
+4. 配置es的elasticsearch.yml文件解决跨域问题
+
+   ```
+   http.cors.enabled: truehttp.cors.allow-origin: "*"
+   ```
+
+   
+
+5. 重启es服务，再次连接（访问9100端口）成功
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy75d81340-dee5-4547-bcae-f3e91562c8a9.png)
+   初学，就把es当做一个数据库！（可以建立索引（库），文档（库中的数据！）)
+
+> 这个head我们就把它当做数据展示工具！(我们后面所有的查询，可以使用Kibana做)。
+
+## 五、Kibana安装
+
+### 了解ELK
+
+ELK是Elasticsearch、Logstash、Kibana三大开源框架首字母大写简称。市面上也被成为Elastic Stack。其中Elasticsearch是一个基于Lucene、分布式、通过Restful方式进行交互的近实时搜索平台框架。像类似百度、谷歌这种大数据全文搜索引擎的场景都可以使用Elasticsearch作为底层支持框架，可见Elasticsearch提供的搜索能力确实强大，市面上很多时候我们简称Elasticsearch为es。
+Logstash是ELK的**中央数据流引擎**，用于从不同目标（文件/数据存储/MQ）收集的不同格式数据，经过过滤后支持输出到不同目的地（文件/MQ/redis/elasticsearch/kafka等）。Kibana可以将elasticsearch的数据通过友好的页面展示出来，提供实时分析的功能。
+市面上很多开发只要提到ELK能够一致说出它是一个**日志分析架构技术栈**总称，但实际上ELK不仅仅适用于日志分析，它还可以支持其它任何数据分析和收集的场景，日志分析和收集只是更具有代表性，并非唯一性。
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudycf2d1011-9222-4722-99ed-c7dae3304892.png)
+
+### Kibana
+
+Kibana是一个针对Elasticsearch的**开源分析及可视化平台**，用来搜索、查看交互存储在Elasticsearch索引中的数据。使用Kibana，可以通过各种图表进行高级数据分析及展示。Kibana让海量数据更容易理解。它操作简单，基于浏览器的用户界面可以**快速创建仪表板**（dashboard）**实时显示**Elasticsearch查询动态。设置Kibana非常简单。无需编码或者额外的基础架构，几分钟内就可以完成Kibana安装并启动Elasticsearch索引监测。
+官网：https://www.elastic.co/cn/kibana/
+
+> Kibana要和ES版本一致！！！
+
+1. 解压目录
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudycf6c22ab-7b95-4016-8759-a681bbe7e3d8.png)
+
+2. 启动测试（/bin/Kibana.bat）
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyc31cbfbb-6329-4e65-9553-ba31162d483f.png)
+
+3. 访问测试，端口号5601
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy7de0e9d3-0b77-426c-a98e-2550f3a49bc8.png)
+
+4. 开发工具
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudye16a6589-579c-4584-aadf-d107b20b4db8.png)
+   我们之后的所有操作都在这里进行编写！
+
+5. 汉化
+
+   自己修改/config/Kibana.yml文件，添加i18n.locale: “zh-CN”，重启Kibana。
+
+   ```
+   i18n.locale: "zh-CN"
+   ```
+
+## 六、ES的核心概念
+
+1. 索引
+2. 字段类型（mapping）
+3. 文档(documents)
+
+### 概述
+
+在前面的学习中，我们已经掌握了es是什么，同时也把es的服务已经安装启动，那么es是如何去存储数据，数据结构是什么，又是如何实现搜索的呢？
+我们先来聊聊ElasticSearch的相关概念吧！
+
+```
+集群，节点，索引，类型，文档，分片，映射是什么？
+```
+
+### 关系行数据库和elasticsearch客观的对比
+
+elasticsearch面向文档
+
+| Relational DB    | ElasticSearch |
+| :--------------- | :------------ |
+| 数据库(database) | 索引(indices) |
+| 表(tables)       | types         |
+| 行(rows)         | documents     |
+| 字段(columns)    | fields        |
+
+elasticsearch(集群)中可以包含多个索引(数据库)，每个索引中可以包含多个类型(表)，每个类型下又包含多个文档(行)，每个文档中又包含多个字段(列)。
+
+### 物理设计
+
+elasticsearch在后台把每个索引划分成多个分片，每个分片可以在集群中的不同服务器间迁移！
+一个人就是一个集群！默认的集群名elasticsearch
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyfdd52e7e-f425-4b4c-b494-28d02bbeb705.png)
+
+### 逻辑设计
+
+一个索引类型中，包含多个文档，比如说文档1、文档2。当我们索引一篇文档时，可以通过这样的一个顺序找到它：索引>类型>文档ID，通过这个组合我们就能索引到某个具体的文档。
+注意：ID不必是整数，实际上它是个字符串。
+
+1. 文档
+   之前说elasticsearch是面向文档的，那么就意味着索引和搜索数据的最小单位是文档，elasticsearch中，文档有几个重要属性：
+
+- **自我包含**：一篇文档同时包含字段和对应的值，也就是同时包含 key:value！
+- **可以是层次型的**：一个文档中包含自文档，复杂的逻辑实体就是这么来的！（**就是一个json对象**，fastjson进行自动转换）
+- **灵活的结构**：文档不依赖预先定义的模式，我们知道关系型数据库中，要提前定义字段才能使用，在elasticsearch中，对于字段是非常灵活的，有时候，我们可以忽略该字段，或者动态的添加一个新的字段。
+  尽管我们可以随意的新增或者忽略某个字段，但是，每个字段的类型非常重要，比如一个年龄字段类型，可以是字符串也可以是整形。因为elasticsearch会保存字段和类型之间的映射及其他的设置。这种映射具体到每个映射的每种类型，这也是为什么在elasticsearch中，类型有时候也称为映射类型。
+
+1. 类型
+   类型是文档的逻辑容器，就像关系型数据库一样，表格是行的容器。类型中对于字段的定义称为映射，比如name映射为字符串类型。我们说文档是无模式的，它们不需要拥有映射中所定义的所有字段，比如新增一个字段，那么elasticsearch是怎么做的呢？
+   elasticsearch会自动的将新字段加入映射，但是这个字段的不确定它是什么类型，elasticsearch就开始猜，如果这个值是18，那么elasticsearch会认为它是整形。但是elasticsearch也可能猜不对，所以最安全的方式就是提前定义好所需要的映射，这点跟关系型数据库殊途同归了，先定义好字段，然后再使用，别整什么么蛾子。
+2. 索引（就是数据库）
+   索引是映射类型的容器，elasticsearch中的索引是一个非常大的文档集合。索引存储了映射类型的字段和其他设置。然后它们被存储到了各个分片上了。我们来研究下分片是如何工作的。
+
+### 物理设计：节点和分片如何工作
+
+一个集群至少有一个节点，而一个节点就是一个elasricsearch进程，节点可以有多个索引默认的，如果你创建索引，那么索引将会有个5个分片（primary shard，又称主分片）构成的，每一个主分片会有一个副本（replica shard，又称复制分片）
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy9957cdf4-ed03-497d-b701-9082b6e8d78a.png)
+上图是一个有3个节点的集群，可以看到主分片和对应的复制分片都不会在同一个节点内，这样有利于某个节点挂掉了，数据也不至于丢失。实际上，一个分片是一个Lucene索引，一个包含**倒排索引**的文件目录，倒排索引的结构使得elasticsearch在不扫描全部文档的情况下，就能告诉你哪些文档包含特定的关键字。不过，等等，倒排索引是什么鬼？
+
+### 倒排索引（面试题）
+
+elasticsearch使用的是一种称为倒排索引的结构，采用Lucene倒排索作为底层。这种结构适用于快速的全文搜索，一个索引由文档中所有不重复的列表构成，对于每一个词，都有一个包含它的文档列表。例如，现在有两个文档，每个文档包含如下内容：
+
+```
+study every day，good good up to forever #文档1包含的内容To forever，study every day，good good up #文档2包含的内容
+```
+
+为了创建倒排索引，我们首先要将每个文档拆分成独立的词（或称为词条或者tokens），然后创建一个包含所有不重复的词条的排序列表，然后列出每个词条出现在哪个文档：
+
+| term    | doc_1 | doc_2 |
+| :------ | :---- | :---- |
+| Study   | 有    | 无    |
+| To      | 无    | 无    |
+| every   | 有    | 有    |
+| forever | 有    | 有    |
+| day     | 有    | 有    |
+| study   | 无    | 有    |
+| good    | 有    | 有    |
+| every   | 有    | 有    |
+| to      | 有    | 无    |
+| up      | 有    | 有    |
+
+现在，我们试图搜索to forever，只需要查看包含每个词条的文档。权重score
+
+| term    | doc_1 | doc_2 |
+| :------ | :---- | :---- |
+| to      | 有    | 无    |
+| forever | 有    | 有    |
+| total   | 2     | 1     |
+
+两个文档都匹配，但是第一个文档比第二个匹配程度更高。如果没有别的条件，现在，这两个包含关键字的文档都将返回。
+再来看一个示例，比如我们通过博客标签来搜索博客文章。那么倒排索引列表就是这样的一个结构：
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy02773fa3-3dff-436b-8ddc-226b75937319.png)
+如果要搜索含有 python标签的文章，那相对于查找所有原始数据而言，查找倒排索引后的数据将会快的多。只需要查看标签这一栏，然后获取相关的文章ID即可。
+elasticsearch的索引和Lucene的索引对比：
+在elasticsearch中，索引这个词被频繁使用，这就是术语的使用。在elasticsearch中，索引被分为多个分片，每份分片是一个Lucene的索引。所以一个elasticsearch索引是由多个Lucene索引组成的。别问为什么，谁让elasticsearch使用Lucene作为底层呢！
+如无特指，说起索引都是指elasticsearch的索引。
+接下来的一切操作都在kibana中Dev Tools下的Console里完成。基础操作！
+
+## 七、IK分词器插件
+
+### 概念
+
+分词：即把一段中文或者别的划分成一个个的关键字，我们在搜索时候会把自己的信息进行分词，会把数据库中或者索引库中的数据进行分词，然后进行一个匹配操作，默认的中文分词是将每个字看成一个词，比如“我爱狂神”会被分为“我””爱”，“狂”，”神”，这显然是不符合要求的，所以我们需要安装中文分词器ik来解决这个问题。
+ik提供了两个分词算法：ik_smart和ik_max_word，其中ik_smart为最少切分，ik_max_word为最细粒度划分！一会我们测试！
+
+> 如果要使用中文，建议使用IK分词器
+
+### 安装
+
+1. 下载地址：https://github.com/medcl/elasticsearch-analysis-ik/releases
+2. 下载完成之后，解压放在elasticsearch的plugins文件下
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy946c5a48-fabe-4f63-b5e2-d48d734f2a44.png)
+3. 重启，观察ES
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy1ebed575-ebeb-491c-965c-94ae85f36898.jpg)
+4. 可以通过elasticsearch-plugin这个命令来查看加载进来的插件。
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy38eb7901-74a3-45b2-8d09-63624b817ffd.jpg)
+5. 使用kibana测试。（查看不同分词效果）
+   `其中ik_smart为最少切分`
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy561f9ca9-d069-4866-80be-4ed65cc117b7.jpg)
+   `ik_max_word为最细粒度划分（穷尽词库）`
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy6b8d0117-d557-4ccc-b894-bb38c345cefa.jpg)
+
+当我们输入”超级喜欢狂神说java”，发现问题：狂神说，被拆开了。
+这种自己需要的词，需要自己加到我们的分词器的字典中。
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy3931f1ef-a564-4fc2-bfed-d59c99481760.jpg)
+
+### ik分词器增加自己的配置
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy98044f93-86c4-46c6-a0aa-efeb7904c24d.jpg)
+
+1. 自定义配置。
+
+2. 把自定义配置添加到扩展配置中去。
+
+3. 重启ES（看细节：如下图）。
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyfd7a77c4-2a71-4b8c-90c0-d9d435f08954.jpg)
+
+4. 重启kibana。
+
+5. 再次测试下，输入”超级喜欢狂神说java”，看下效果。
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyad4f675e-d79d-4800-9716-53e1b0fee9df.jpg)
+
+   **以后的话，我们需要自己配置分词就在自己定义的dic文件中进行配置即可！|**
+
+## 八、restful风格说明
+
+一种软件架构风格，而不是标准，只是提供了一组设计原则和约束条件。它主要用于客户端和服务器交互类的软件。基于这个风格设计的软件可以更简洁，更有层次，更易于实现缓存等机制。
+
+基本rest说明：
+
+| method |                     url地址                     |          描述          |
+| :----: | :---------------------------------------------: | :--------------------: |
+|  PUT   |     localhost:9200/索引名称/类型名称/文档id     | 创建文档（指定文档id） |
+|  POST  |        localhost:9200/索引名称/类型名称         | 创建文档（随机文档id） |
+|  POST  | localhost:9200/索引名称/类型名称/文档id/_update |        修改文档        |
+| DELETE |     localhost:9200/索引名称/类型名称/文档id     |        删除文档        |
+|  GET   |     localhost:9200/索引名称/类型名称/文档id     |   查询文档通过文档id   |
+|  POST  |    localhost:9200/索引名称/类型名称/_search     |      查询所有数据      |
+
+### 关于索引的基本操作
+
+#### 创建一个索引。
+
+```html
+# ElasticSearch的7.x.x版本
+PUT /索引名/类型名/文档id
+{
+    请求体
+}
+```
+
+![](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy6affdfb4-ac90-4229-b4fb-399bace0b84f.jpg)
+
+```HTML
+# ElasticSearch的8.x.x版本，类型已经弃用，默认写_doc。
+PUT /索引名/_doc/文档id
+{
+    请求体
+}
+```
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudye50e4f7c-4d18-42c8-bf83-7ec8f58add8b.jpg)
+
+name这个字段需要指定类型吗？需要（毕竟我们关系型数据库是需要指定类型的）
+
+```te
+官网类型文档地址：https://www.elastic.co/guide/en/elasticsearch/reference/current/keyword.html
+- 字符串类型text、keyword
+- 数值类型long，integer，short，byte，double，float，half float，scaled float
+- 日期类型date
+- 布尔值类型boolean·
+- 二进制类型binary
+- 等等……
+```
+
+#### 指定字段类型
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy4db5a23e-ff3f-477f-b1a6-a3ee709c8de5.jpg)
+获得这个规则（可以通过GET请求获取具体的信息）
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyd0c9a72f-7422-4312-b3ae-a8014702708a.jpg)
+
+#### 查看默认信息。
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyba90200b-366d-4dde-a2d1-bb94f974f04a.jpg)
+
+如果自己的文档字段没有指定，那么es就会给我们默认配置字段类型！
+
+扩展：通过命令elasticsearch索引情况！（通过get_cat/可以获得es的当前的很多信息！）
+
+```
+GET _cat/health      # 查看健康值GET _cat/indices?v  #查看所有东西的版本信息
+```
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy78620e11-6059-4526-a54f-ce69ee36df6d.jpg)
+
+#### 修改
+
+> 提交，使用PUT，覆盖（弊端：如果漏掉一个字段，那么字段的值就没了）
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy57ca4be4-3c5d-4922-b0cb-2b1f2d37baa9.jpg)
+
+> 新的修改方法：使用post提交（7.x.x版本和8.x.x版本提交方式不一样）
+
+`7.x.x版本（7.6.1）`
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy3369c222-a074-4ec0-973e-9555e7d5b4b4.jpg)
+
+`8.x.x版本（8.2.3）`
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy89491543-d2b2-4593-b76e-9d763a8e864f.jpg)
+
+#### 删除
+
+通过DELETE命令实现删除、根据你的请求来判断是删除索引还是删除文档记录！
+使用RESTFUL风格是我们ES推荐大家使用的！
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy2d1a8eaa-6ed5-4c1a-9fdd-8d2a4fb31e1b.jpg)
+
+### 2.关于文档的基本操作（重点）
+
+#### 2.1 基本操作（增删改查回顾）
+
+##### 添加数据
+
+```java
+PUT /kuangshen/_doc/1{  "name": "狂神说",  "age": 3,  "desc": "工资2500",  "tags": ["直男","温暖","技术宅"]}
+PUT /kuangshen/_doc/2{  "name": "张三",  "age": 30,  "desc": "没有工资",  "tags": ["渣男","旅游","交友"]}
+```
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy5447bdf1-49f4-47ec-bb87-3b3a020b724d.png)
+
+##### 查询数据
+
+```java
+GET /kuangshen/_doc/1GET /kuangshen/_doc/2
+```
+
+##### 更新 PUT
+
+```java
+PUT /kuangshen/_doc/1{  "name": "狂神说123",  "age": 3,  "desc": "工资2500",  "tags": ["直男","温暖","技术宅"]}
+```
+
+##### 更新 POST
+
+```java
+POST /kuangshen/_doc/1{ "doc": {  "name": "狂神说123"     }}
+```
+
+#### 2.2 简单操作（条件查询）
+
+```java
+// 支持模糊查询GET /kuangshen/_search?q=name:狂神说
+```
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyad57e572-a951-4e60-8aa6-c27a636bc5be.jpg)
+
+#### 2.3 复杂操作
+
+（查询select：排序，分页，高亮，模糊查询，精准查询）
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyc583459c-4b7d-48ef-9a95-8a29be179027.png)
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyd76e7ec9-1db9-4e78-a827-d1dfa638ae13.jpg)
+
+##### 过滤字段查询
+
+（输出结果，不需要很多）：(我们之后使用java操作es，所有的方法和对象就是这里面的key！)
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudybb1cdc3e-53b7-424b-b606-4bf15e2781dc.png)
+
+##### 排序查询：
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy3ed9fc6e-6612-4aa1-b98a-f6e05afb595f.jpg)
+
+##### 分页查询：
+
+（数据索引下标还是从0开始）
+
+GET /kuangshen/_search/{currentPage}/{pageSize}
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy9ab19e7c-1343-4187-9457-a76b901730e5.png)
+
+##### 布尔值查询：
+
+must （and），所有的条件都要符合 where id=1 and name=xxx
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy4ada5a5b-7228-4c5a-8236-52dcff04934b.jpg)
+should（or），所有的条件都要符合 where id=1 or name=xxx
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy18b8ef97-95da-49e5-99bb-062772bc7784.jpg)
+must_not (not)
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy3a0e76da-a0f7-4746-ac20-f715c25fd6b1.jpg)
+
+##### filter查询过滤：
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy539540d8-ef19-46a1-a7f7-316570dd6c3d.png)
+
+##### 匹配多个条件：
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy9cc8f263-a735-444a-aa33-dc85866a4bd2.png)
+
+##### 精确查询：
+
+（term 查询是直接通过倒排索引指定的词条进程精确的查找的！）
+关于分词：
+
+- term：直接查询精确的。（两种情况：text、keyword）
+- match：会使用分词器解析！（先分析文档，然后在通过分析的文档进行查询！）
+
+1. 创建数据
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy43ff2569-a793-435c-98fb-d9378f53e3dc.jpg)
+2. 分析数据，查看结果
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy01f7b84e-c92c-49d4-98df-b15a87bf9e59.jpg)
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudya7688cae-3dda-4c09-a280-91e1d68e05d8.jpg)
+3. 查询数据**（keyword类型的字段不会被分词器解析）**
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy18a73b07-b8cf-49f1-9a60-a6960b291582.jpg)
+   ![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyf76c8d1b-d4c2-486c-bdcd-475a5a296a19.jpg)
+
+##### 多个值匹配精确查询：
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy2b25f630-2ef0-43b7-bdf8-be99a9e26a95.jpg)
+
+##### 高亮查询：
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudybf2b3be8-0081-4734-b9c3-ace886405ef9.jpg)
+
+
+
+## 九、集成SpringBoot
+
+> 找官方文档 （7.6.x）
+
+https://www.elastic.co/guide/index.html
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy0fe4501f-e1e0-4de6-b9b7-1ee8dc027e99.jpg)
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudyde815c4b-6e0f-42e6-ad76-bb2c50e8e4a2.jpg)
+
+### 1. 找到原生的依赖。
+
+```xml
+<dependency>    
+	<groupId>org.elasticsearch.client</groupId>    
+    <artifactId>elasticsearch-rest-high-level-client</artifactId>    
+    <version>7.6.2</version>
+</dependency>
+```
+
+### 2. 找对象。
+
+![img](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/kuangstudy330ec604-a75d-4ea5-ba2e-099add19cd37.jpg)
+
+```java
+RestHighLevelClient client = new RestHighLevelClient(        
+    RestClient.builder(                
+        new HttpHost("localhost", 9200, "http"),                
+        new HttpHost("localhost", 9201, "http")
+   	)
+);
+```
+
+### 3. 分析这个类的方法。
+
+类中的方法api
+
+## 十、集成SpringBoot代码实现（7.6.1）
+
+### 1.导入依赖
+
+```xml
+<!--processor-->        
+<dependency>            
+    <groupId>org.springframework.boot</groupId>            
+    <artifactId>spring-boot-configuration-processor</artifactId>            
+    <optional>true</optional>        
+</dependency>        
+<!--lombok-->        
+<dependency>            
+    <groupId>org.projectlombok</groupId>            
+    <artifactId>lombok</artifactId>            
+    <optional>true</optional>        
+</dependency>        
+<!--整合es-->        
+<dependency>            
+    <groupId>org.springframework.boot</groupId>            
+    <artifactId>spring-boot-starter-data-elasticsearch</artifactId>       
+</dependency>       
+<!--es-->        
+<dependency>            
+    <groupId>org.elasticsearch.client</groupId>            
+    <artifactId>elasticsearch-rest-high-level-client</artifactId>            
+    <version>7.6.1</version>        
+</dependency>       
+<!--fastjson-->        
+<dependency>            
+    <groupId>com.alibaba</groupId>            
+    <artifactId>fastjson</artifactId>            
+    <version>1.2.80</version>        
+</dependency>
+```
+
+### 2.配置ElasticSearch
+
+```java
+import org.apache.http.HttpHost;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+@Configurationpublic 
+class ElasticSearchClientConfig {    
+    @Bean    
+    public RestHighLevelClient restHighLevelClient(){        
+        RestHighLevelClient client = new RestHighLevelClient(                
+            RestClient.builder(                        
+                new HttpHost("localhost", 9200, "http")));        
+        return client;    
+    }
+}
+```
+
+### 3.导入bean后，使用。
+
+```java
+@SpringBootTestclass 
+ElasticSearchApiApplicationTests {    
+    @Autowired    
+    private RestHighLevelClient restHighLevelClient;
+}
+```
+
+## 十一、具体的api测试
+
+### 1、创建索引
+
+```Java
+// 测试索引的创建    
+@Test    
+void testCreateIndex() throws IOException {        
+	// 1.创建索引请求        
+	CreateIndexRequest request = new CreateIndexRequest("kuang_index");        
+	// 2.执行创建请求，请求后获得响应createIndexResponse       
+	CreateIndexResponse createIndexResponse = restHighLevelClient.indices().create(request,RequestOptions.DEFAULT);        
+	System.out.println(createIndexResponse);    
+}
+```
+
+### 2、判断索引是否存在
+
+```Java
+// 测试获取索引，只能判断其是否存在    
+@Test    
+	void testExistIndex() throws IOException {        
+	// 1.创建索引请求        
+	GetIndexRequest request = new GetIndexRequest("kuang_index");        
+	// 2.获取索引，是否存在        
+	boolean exists = restHighLevelClient.indices().exists(request, RequestOptions.DEFAULT);        
+	System.out.println(exists);    
+}
+```
+
+### 3、删除索引
+
+```Java
+// 测试删除索引    
+@Test    
+	void testDeleteIndex() throws IOException {        
+	// 1.创建删除索引请求       
+	DeleteIndexRequest request = new DeleteIndexRequest("kuang_index");       
+	// 2.获取删除状态        
+	AcknowledgedResponse delete = restHighLevelClient.indices().delete(request, RequestOptions.DEFAULT);
+    System.out.println(delete.isAcknowledged());    
+}
+```
+
+### 4、添加文档
+
+```Java
+// 测试添加文档    
+@Test    
+void testAddDocument() throws IOException {        
+    // 1.创建对象       
+    User user = new User("狂神说",3);        
+    // 2.创建请求        
+    IndexRequest request = new IndexRequest("kuang_index");     
+    // 3.规则 put /kuang_index/_doc/1       
+    request.id("1");       
+    request.timeout(TimeValue.timeValueSeconds(1));// 或者 request.timeout("1s");        
+    // 4.把数据放入请求 json      
+    IndexRequest source = request.source(JSON.toJSONString(user), XContentType.JSON);    
+    // 5.客户端发送请求，获取响应结果       
+    IndexResponse indexResponse = restHighLevelClient.index(request, RequestOptions.DEFAULT); 
+    System.out.println(indexResponse.toString());// 结果的json       
+    System.out.println(indexResponse.status());// 对应我们命令返回的状态 created    
+}
+```
+
+### 5、判断文档是否存在
+
+```Java
+// 获取文档信息，判断是否存在 get /index/_doc/1   
+@Test    
+void testIsExists() throws IOException {      
+    GetRequest getRequest = new GetRequest("kuang_index", "1");        // 不获取返回_source的上下文了   
+    getRequest.fetchSourceContext(new FetchSourceContext(false));       
+    getRequest.storedFields("_none_");        
+    boolean exists = restHighLevelClient.exists(getRequest, RequestOptions.DEFAULT);        
+    System.out.println(exists);    
+}
+```
+
+### 6、获取文档的信息
+
+```Java
+    // 获取文档的信息    
+@Test    
+void testGetDocument() throws IOException {       
+    GetRequest getRequest = new GetRequest("kuang_index", "1");   
+    GetResponse getResponse = restHighLevelClient.get(getRequest, RequestOptions.DEFAULT);  
+    System.out.println(getResponse.getSourceAsString());// 打印文档的内容        
+    System.out.println(getResponse);// 返回的全部内容和密令一样   
+}
+```
+
+### 7、更新文档的信息
+
+```java
+// 更新文档的信息    
+@Test   
+	void testUpdateDocument() throws IOException {        
+	UpdateRequest updateRequest = new UpdateRequest("kuang_index", "1");       
+    updateRequest.timeout("1s");        
+	User user = new User("狂神说Java", 18);      
+    updateRequest.doc(JSON.toJSONString(user),XContentType.JSON);        
+	UpdateResponse update = restHighLevelClient.update(updateRequest,RequestOptions.DEFAULT);
+    System.out.println(update.status());    
+}
+```
+
+### 8、删除文档信息
+
+```Java
+// 删除文档记录    
+@Test    
+void testDeleteRequest() throws IOException {        
+	DeleteRequest deleteRequest = new DeleteRequest("kuang_index","1");       
+    deleteRequest.timeout("1s");        
+	DeleteResponse deleteResponse = restHighLevelClient.delete(deleteRequest,RequestOptions.DEFAULT);
+    System.out.println(deleteResponse.status());    
+}
+```
+
+### 9、批量插入数据
+
+特殊的，真实的项目一般都会批量插入数据。
+
+```Java
+// 特殊的，真实的项目一般都会批量插入数据    
+@Test    
+void testBulkRequest() throws IOException {       
+    BulkRequest bulkRequest = new BulkRequest();      
+    bulkRequest.timeout("1s");        
+    ArrayList<User> users = new ArrayList<>();     
+    users.add(new User("kuangshen1",3));       
+    users.add(new User("kuangshen2",3));       
+    users.add(new User("kuangshen3",3));       
+    users.add(new User("qinjiang1",3));        
+    users.add(new User("qinjiang1",3));       
+    users.add(new User("qinjiang1",3));       
+    for (int i = 0; i < users.size(); i++) {            
+        bulkRequest.add(new IndexRequest("kuang_index")                    
+                        .id(""+(i+1))// 不设置id，则会生成默认id                 
+                        .source(JSON.toJSONString(users.get(i)),XContentType.JSON));       
+    } 
+    BulkResponse bulkResponse = restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+    System.out.println(bulkResponse.hasFailures());// 是否失败，返回false代表成功    }
+```
+
+### 10、查询
+
+```Java
+// 查询    
+// SearchRequest 搜索请求    
+// SearchSourceBuilder 条件构造    
+// HighlightBuilder 构建高亮    
+// TermQueryBuilder精确查询    
+// MatchALLQueryBuilder    
+// xxx QueryBuilder 对应我们刚才看到的命令！    
+@Test    
+void testSearch() throws IOException {        
+    // 创建请求        
+    SearchRequest searchRequest = new SearchRequest("kuang_index");       
+    // 构建搜索条件       
+    SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();      
+    // 查询条件，我们可以使用 QueryBuilders 工具来实现        
+    TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("name", "qinjiang1");// 精确        
+    //MatchAllQueryBuilder matchAllQueryBuilder = QueryBuilders.matchAllQuery();// 匹配所有     
+    sourceBuilder.query(termQueryBuilder);       
+    sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));      
+    searchRequest.source(sourceBuilder);        
+    SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);   
+    System.out.println(JSON.toJSONString(searchResponse.getHits()));        
+    System.out.println("=============");        
+    for (SearchHit hit : searchResponse.getHits().getHits()) {            
+        System.out.println(hit.getSourceAsMap());        
+    }    
+}
+```

@@ -1,0 +1,35 @@
+{
+  "name": "vuepress-starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vuepress/plugin-register-components": "^2.0.0-beta.43",
+    "element-plus": "^2.1.11",
+    "vuepress": "^2.0.0-beta.43"
+  },
+  "dependencies": {
+    "@vuepress/plugin-register-components": "^2.0.0-beta.43",
+    "ant-design-vue": "^3.2.3",
+    "element-plus": "^2.1.11",
+    "less": "^4.1.3",
+    "rollup-plugin-compress-dist": "^1.0.8",
+    "vconsole": "^3.15.0",
+    "vuepress": "^2.0.0-beta.43"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/wqby_9479421/q-blog.git"
+  },
+  "keywords": [],
+  "description": ""
+}

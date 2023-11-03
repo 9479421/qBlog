@@ -1,0 +1,1 @@
+const e={key:"v-12840908",path:"/view/pigeonhole/",title:"",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u{1F97D} \u5386\u53F2\u535A\u6587",slug:"\u{1F97D}-\u5386\u53F2\u535A\u6587",children:[]}],git:{},filePathRelative:"view/pigeonhole/README.md"};export{e as data};
