@@ -1,8 +1,12 @@
 <h1 style='text-align:center'>qBlog</h1>
 
-基于VuePress2.0文档生成器，主题UI借鉴自峰华的基于Docusaurus的个人主页
+## 实际部署
 
-个人博客页：[http://www.wqby.vip](http://www.wqby.vip/view/about)
+个人博客：[http://www.wqby.vip](http://www.wqby.vip/view/about)
+
+## 项目说明
+
+基于VuePress2.0文档生成器，主题UI借鉴自峰华的基于Docusaurus的个人主页
 
 采用纯Vue编写，UI库使用了AntDesignVue
 
