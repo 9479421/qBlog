@@ -2,7 +2,7 @@
 
 基于VuePress2.0文档生成器，主题UI借鉴自峰华的基于Docusaurus的个人主页
 
-个人博客页：[](http://www.wqby.vip/view/about)
+个人博客页：[http://www.wqby.vip](http://www.wqby.vip/view/about)
 
 采用纯Vue编写，UI库使用了AntDesignVue
 
