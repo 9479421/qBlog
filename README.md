@@ -1,5 +1,5 @@
 <div align="center">
-    <h1> qBlog </h1>
+    <h1>qBlog</h1>
 </div>
 
 ## 实际部署
