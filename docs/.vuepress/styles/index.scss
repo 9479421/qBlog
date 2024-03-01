@@ -1,0 +1,93 @@
+// NProgress颜色
+.bar {
+    --nprogress-color: rgb(0, 176, 255);
+    --nprogress-z-index: 1031;
+}
+
+//回到顶部按钮颜色
+.back-to-top {
+    --back-to-top-z-index: 5;
+    --back-to-top-color: rgb(0, 176, 255);
+    --back-to-top-color-hover: rgb(0, 81, 255);
+}
+
+// 主页宽度铺满
+.theme-container.home-page-class {
+    .theme-default-content:not(.custom) {
+        max-width: none;
+        margin: 0 auto;
+        // padding: 2rem 0rem 2rem 3rem;
+    }
+
+    blockquote p {
+        font-size: 28px;
+        color: #000;
+        font-weight: bold;
+    }
+
+}
+.home-page-class{
+    blockquote p {
+        font-size: 28px;
+        color: #000;
+        font-weight: bold;
+    }
+}
+
+//白天模式下引用字体
+body {
+    blockquote p {
+        // font-size: 28px;
+        color: #000;
+        
+        // font-weight: bold;
+    }
+}
+
+//黑天模式下引用字体
+html.dark {
+    blockquote p {
+        // font-size: 28px;
+        color: #fff;
+        // font-weight: bold;
+    }
+}
+
+//引用左边块颜色和宽度
+blockquote {
+    border-left: 0.8rem solid rgb(32, 175, 252)
+}
+
+a {
+    color: rgb(32, 175, 252)
+}
+
+.navbar-item>a:hover,
+.navbar-item>a.router-link-active {
+    margin-bottom: -2px;
+    border-bottom: 4px solid rgb(32, 175, 252);
+}
+
+.navbar-items a:hover,
+.navbar-items a.router-link-active {
+    color: rgb(32, 175, 252);
+}
+
+.navbar-dropdown-wrapper .navbar-dropdown-title-mobile:hover {
+    color: rgb(32, 175, 252);
+}
+
+.navbar-dropdown-wrapper .navbar-dropdown .navbar-dropdown-item a:hover {
+    color: rgb(32, 175, 252);
+}
+
+.navbar-dropdown-wrapper .navbar-dropdown .navbar-dropdown-item a.router-link-active {
+    color: rgb(32, 175, 252);
+}
+
+.navbar-items .navbar-item > a:hover, .navbar-items .navbar-item > a.route-link-active{
+    border-bottom: 2px solid rgb(32, 175, 252);
+}
+
+
+@import "note.scss";
