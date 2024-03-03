@@ -4,7 +4,7 @@
 
 ## 实际部署
 
-个人博客：[http://www.wqby.vip](http://www.wqby.vip/view/about)
+个人博客：[http://www.wqby.vip](http://www.wqby.vip)
 
 ## 项目说明
 
