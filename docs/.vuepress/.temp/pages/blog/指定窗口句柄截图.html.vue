@@ -1,0 +1,73 @@
+<template><div><h1 id="指定窗口句柄截图" tabindex="-1"><a class="header-anchor" href="#指定窗口句柄截图"><span>指定窗口句柄截图</span></a></h1>
+<p>最近在编写一款象棋AI辅助，用到了图片标注训练，所以要截取象棋游戏本身的窗口图片进行训练。</p>
+<p>常规的windows指定窗口句柄进行截图的方法如下：</p>
+<div class="language-c line-numbers-mode" data-ext="c" data-title="c"><pre v-pre class="language-c"><code>HBITMAP <span class="token function">windowsShot</span><span class="token punctuation">(</span>HWND hwnd<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    RECT rect<span class="token punctuation">;</span>
+    <span class="token function">GetWindowRect</span><span class="token punctuation">(</span>hwnd<span class="token punctuation">,</span> <span class="token operator">&amp;</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    HDC hdc <span class="token operator">=</span> <span class="token function">GetWindowDC</span><span class="token punctuation">(</span>hwnd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    HDC memDC<span class="token punctuation">;</span>
+    memDC <span class="token operator">=</span> <span class="token operator">::</span><span class="token function">CreateCompatibleDC</span><span class="token punctuation">(</span>hdc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    HBITMAP memBitmap<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> width <span class="token operator">=</span> rect<span class="token punctuation">.</span>right <span class="token operator">-</span> rect<span class="token punctuation">.</span>left<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> height <span class="token operator">=</span> rect<span class="token punctuation">.</span>bottom <span class="token operator">-</span> rect<span class="token punctuation">.</span>top<span class="token punctuation">;</span>
+    memBitmap <span class="token operator">=</span> <span class="token operator">::</span><span class="token function">CreateCompatibleBitmap</span><span class="token punctuation">(</span>hdc<span class="token punctuation">,</span>width<span class="token punctuation">,</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SelectObject</span><span class="token punctuation">(</span>memDC<span class="token punctuation">,</span> memBitmap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">BitBlt</span><span class="token punctuation">(</span>memDC<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">,</span> hdc<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> SRCCOPY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//删除创建的兼容内存DC</span>
+    <span class="token function">DeleteDC</span><span class="token punctuation">(</span>memDC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//释放窗口DC</span>
+    <span class="token function">ReleaseDC</span><span class="token punctuation">(</span>hwnd<span class="token punctuation">,</span> hdc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> memBitMap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    CImage image<span class="token punctuation">;</span>
+    HBITMAP memBitMap <span class="token operator">=</span> <span class="token function">windowsShot</span><span class="token punctuation">(</span>要获取的窗口句柄<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	image<span class="token punctuation">.</span><span class="token function">Attach</span><span class="token punctuation">(</span>memBitMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	image<span class="token punctuation">.</span><span class="token function">Save</span><span class="token punctuation">(</span>L<span class="token string">"C:\\Users\\Administrator\\Desktop\\1.png"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	image<span class="token punctuation">.</span><span class="token function">Detach</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">DeleteObject</span><span class="token punctuation">(</span>memBitmap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/image-20240317213630426.png" alt="image-20240317213630426"></p>
+<p>发现可以正常截取到窗口图片。但是如果是Chrome浏览器，网易云音乐，天天象棋这类使用D3D绘制出来的窗口，我们想通过窗口句柄直接截取，我们会发现只能截取到一片漆黑。</p>
+<p><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/image-20240317215834327.png" alt="image-20240317215834327"></p>
+<p>这时候就不能使用Windows提供的默认截图API了。</p>
+<blockquote>
+<p>方案一：全局截图并裁剪</p>
+</blockquote>
+<p>首先将要截图的窗口置到最前，对整个屏幕进行截图，随后对截图窗口位置进行裁剪。</p>
+<div class="language-c line-numbers-mode" data-ext="c" data-title="c"><pre v-pre class="language-c"><code>HBITMAP Utils<span class="token operator">::</span><span class="token function">WindowCapture_Front</span><span class="token punctuation">(</span>HWND hwnd<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	RECT rect<span class="token punctuation">;</span>
+	<span class="token function">GetWindowRect</span><span class="token punctuation">(</span>hwnd<span class="token punctuation">,</span> <span class="token operator">&amp;</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token comment">//父窗口置顶 为截图做准备</span>
+	<span class="token operator">::</span><span class="token function">SetWindowPos</span><span class="token punctuation">(</span><span class="token punctuation">(</span>hwnd<span class="token punctuation">)</span><span class="token punctuation">,</span> HWND_NOTOPMOST<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> SWP_NOMOVE <span class="token operator">|</span> SWP_NOSIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token operator">::</span><span class="token function">SetWindowPos</span><span class="token punctuation">(</span><span class="token operator">::</span><span class="token function">GetParent</span><span class="token punctuation">(</span>hwnd<span class="token punctuation">)</span><span class="token punctuation">,</span> HWND_NOTOPMOST<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> SWP_NOMOVE <span class="token operator">|</span> SWP_NOSIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	HDC hdc <span class="token operator">=</span> <span class="token function">GetWindowDC</span><span class="token punctuation">(</span><span class="token operator">::</span><span class="token function">GetDesktopWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	HDC memDC<span class="token punctuation">;</span>
+	memDC <span class="token operator">=</span> <span class="token operator">::</span><span class="token function">CreateCompatibleDC</span><span class="token punctuation">(</span>hdc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	HBITMAP memBitmap<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> width <span class="token operator">=</span> rect<span class="token punctuation">.</span>right <span class="token operator">-</span> rect<span class="token punctuation">.</span>left<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> height <span class="token operator">=</span> rect<span class="token punctuation">.</span>bottom <span class="token operator">-</span> rect<span class="token punctuation">.</span>top<span class="token punctuation">;</span>
+	memBitmap <span class="token operator">=</span> <span class="token operator">::</span><span class="token function">CreateCompatibleBitmap</span><span class="token punctuation">(</span>hdc<span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">SelectObject</span><span class="token punctuation">(</span>memDC<span class="token punctuation">,</span> memBitmap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">BitBlt</span><span class="token punctuation">(</span>memDC<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">,</span> hdc<span class="token punctuation">,</span> rect<span class="token punctuation">.</span>left<span class="token punctuation">,</span> rect<span class="token punctuation">.</span>top<span class="token punctuation">,</span> SRCCOPY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token comment">////删除创建的兼容内存DC</span>
+	<span class="token function">DeleteDC</span><span class="token punctuation">(</span>memDC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">////释放窗口DC</span>
+	<span class="token function">ReleaseDC</span><span class="token punctuation">(</span>hwnd<span class="token punctuation">,</span> hdc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">return</span> memBitmap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/image-20240317215603019.png" alt="image-20240317215603019"></p>
+<blockquote>
+<p>方案二：D3D截图</p>
+</blockquote>
+<p>妈的，还在研究，这个方案有点复杂</p>
+</div></template>
+
+

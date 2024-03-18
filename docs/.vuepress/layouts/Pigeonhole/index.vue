@@ -56,7 +56,7 @@ import { CirclePlusFilled } from '@element-plus/icons-vue'
                                     <el-timeline-item placement="top" :icon="CirclePlusFilled" type="info"
                                         v-for="it in item.value" @click="directURL(it.path)"
                                         @mouseenter="curArticle = fixPic(it.info.excerpt)">
-                                        <span><span style="margin-right:20px;font-size: 13px;color:rgb(123, 133, 129);">{{
+                                        <span><span style="margin-right:20px;font-size: 13px;color:rgb(123, 133, 129);display: inline-block;min-width: 30px;">{{
                                             dateFormat(it.info.date)
                                         }}</span> <span class="title" style="font-size: 16px;">{{ it.info.title }}</span>
                                         </span>
@@ -76,8 +76,9 @@ import { CirclePlusFilled } from '@element-plus/icons-vue'
 
 
                     <el-col :span="6" style="border: 1px solid rgb(245, 244, 244)">
-                        <div class="preview" style="float:left">
-                            <h4 style="text-align: center;">博客预览</h4>
+                        
+                        <div class="preview">
+                            <h4 style="text-align: center;width: 100%;">博客预览</h4>
                             <div v-html="curArticle"></div>
                         </div>
                     </el-col>
@@ -90,6 +91,8 @@ import { CirclePlusFilled } from '@element-plus/icons-vue'
 </template>
 
 <style scoped>
+
+
 .sticky-card {
     position: -webkit-sticky;
     /* Safari */
@@ -167,7 +170,16 @@ import { CirclePlusFilled } from '@element-plus/icons-vue'
 
 }
 </style>
-
+<style lang="less" scoped>
+/deep/ code{
+    background-color: transparent !important;
+    color: #fff;
+    padding: 0;
+    border-radius: 0;
+    overflow-wrap: unset;
+    -webkit-font-smoothing: auto;
+}
+</style>
 
 <script>
 import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue'

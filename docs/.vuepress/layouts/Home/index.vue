@@ -194,6 +194,16 @@ export default {
 </script>
   
 <style lang="less" scoped>
+/deep/ code{
+    background-color: transparent !important;
+    color: #fff;
+    padding: 0;
+    border-radius: 0;
+    overflow-wrap: unset;
+    -webkit-font-smoothing: auto;
+}
+
+
 html.dark {
     .el-card {
         background-color: rgb(34, 39, 46);
@@ -440,6 +450,9 @@ html.dark {
     color: aqua;
     text-decoration: none;
 }
+
+
+
 </style>
 
 

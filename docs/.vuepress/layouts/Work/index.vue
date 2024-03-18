@@ -93,7 +93,7 @@
           </el-carousel-item>
 
         </el-carousel>
-        <el-button style="width:100%;" @click="closeShow()" type="primary">关  闭</el-button>
+        <el-button style="width:100%;" @click="closeShow()" type="primary">关 闭</el-button>
 
       </div>
 
@@ -167,11 +167,16 @@ export default {
       return retImgArr;
     },
     selectWork(i) {
-      this.curImgs = worksArr[i].imgs;
-      this.isTopShow = true;
-      document.getElementsByClassName('works')[0].style.marginTop = '20px';
+      if (worksArr[i].type == 'github') {
+        window.open(worksArr[i].url, '_blank')
+      } else {
+        this.curImgs = worksArr[i].imgs;
+        this.isTopShow = true;
+        document.getElementsByClassName('works')[0].style.marginTop = '20px';
+      }
+
     },
-    closeShow(){
+    closeShow() {
       this.isTopShow = false;
       document.getElementsByClassName('works')[0].style.marginTop = '70px';
     }
@@ -241,13 +246,13 @@ html.dark .el-card {
 
 @media screen and (max-width: 719px) {
 
-.el-col-8 {
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:10px;
-    max-width:95%;
+  .el-col-8 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    max-width: 95%;
     flex: 0 0 100%;
-}
+  }
 
 }
 </style>

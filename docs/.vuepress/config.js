@@ -151,20 +151,20 @@ export default defineUserConfig({
         //     )
         //   },
         // },
-        {
-          key: 'timeline',
-          // Only article with date should be added to timeline
-          filter: (page) => page.frontmatter.date instanceof Date,
-          // Sort pages with time
-          sorter: (pageA, pageB) =>
-            new Date(pageB.frontmatter.date).getTime() -
-            new Date(pageA.frontmatter.date).getTime(),
-          layout: 'Timeline',
-          frontmatter: () => ({
-            title: 'Timeline',
-            sidebar: false,
-          }),
-        },
+        // {
+        //   key: 'timeline',
+        //   // Only article with date should be added to timeline
+        //   filter: (page) => page.frontmatter.date instanceof Date,
+        //   // Sort pages with time
+        //   sorter: (pageA, pageB) =>
+        //     new Date(pageB.frontmatter.date).getTime() -
+        //     new Date(pageA.frontmatter.date).getTime(),
+        //   layout: 'Timeline',
+        //   frontmatter: () => ({
+        //     title: 'Timeline',
+        //     sidebar: false,
+        //   }),
+        // },
         {
           key: 'Pigeonhole',
           // Only article with date should be added to timeline

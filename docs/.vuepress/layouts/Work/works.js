@@ -1,4 +1,5 @@
 export default [
+
     {
         name: '英魂之刃PP脚本',
         description: 'RPG副本自动刷试炼打怪、自动做活动、签到、定时自动开机启动',
@@ -56,7 +57,19 @@ export default [
         ]
     }
     ,
-   
+
+    {
+        name: 'qEasyServer',
+        description: 'C++Linux高性能Http服务器',
+        date: '2023',
+        language: 'C++',
+        imgs: [
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20240318011449.png',
+        ],
+        type: 'github',
+        url: 'https://github.com/9479421/qEasyServer'
+    }
+    ,
     {
         name: '实习自动打卡系统',
         description: '支持10余款实习平台的全自动打卡系统，系统代码庞大功能稳定运行半年之久',
@@ -67,7 +80,7 @@ export default [
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20240301224331.png',
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20240301224347.png',
         ]
-    } ,
+    },
     {
         name: '刺激战场方框透视',
         description: '刺激战场透视外挂，通过矩阵和坐标进行计算绘制出人物方框',
@@ -85,9 +98,9 @@ export default [
         language: 'TypeScript+Vue3+Electron+SpringBoot',
         imgs: [
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20221124095344.png',
-                'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20221124095411.png',
-                'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20221124095354.png',
-                'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20221124095426.png'
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20221124095411.png',
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20221124095354.png',
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20221124095426.png'
         ]
     },
 
@@ -162,7 +175,7 @@ export default [
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20220509192816.png',
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/QQ图片20220508223355.png',
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/QQ图片20220508223408.png',
-            
+
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20220509193151.png',
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20220509192706.png',
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20220509193701.png',
@@ -220,6 +233,18 @@ export default [
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/21.png',
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20220516200217.png'
         ]
+    }
+    ,
+    {
+        name: 'qHttp',
+        description: '超精简易用爬虫库',
+        date: '2023',
+        language: 'Java',
+        imgs: [
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20240318011449.png',
+        ],
+        type: 'github',
+        url: 'https://github.com/9479421/qHttp'
     }
     ,
     {
@@ -365,7 +390,7 @@ export default [
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/4c26cdc202ceb9d5ddd585c5a7a57d3.png',
         ]
     }
-    
-    
+
+
 
 ]
