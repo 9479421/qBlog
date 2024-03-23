@@ -1,14 +1,1 @@
 export const themeData = JSON.parse("{\"logo\":\"https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/b_9523abbb426ea0c8a21b2754fdc52300.jpg\",\"navbar\":[{\"text\":\"主页\",\"link\":\"/\"},{\"text\":\"学习\",\"children\":[{\"text\":\"学习笔记\",\"link\":\"/view/note/\"}]},{\"text\":\"归档\",\"link\":\"/view/pigeonhole/\"},{\"text\":\"作品\",\"link\":\"/view/work/\"},{\"text\":\"关于\",\"link\":\"/view/about/\"}],\"sidebar\":{\"/view/note\":[{\"text\":\"Android\",\"children\":[\"/view/note/Android/《第一行代码》学习笔记.md\"]},{\"text\":\"C++\",\"children\":[\"/view/note/C++/Linux服务器编程.md\",\"/view/note/C++/VS修改编码格式为UTF-8.md\",\"/view/note/C++/vs未能正确加载XX包的解决方法.md\",\"/view/note/C++/易道云学习笔记.md\"]},{\"text\":\"C语言\",\"children\":[]},{\"text\":\"Git\",\"children\":[\"/view/note/Git/Git学习笔记.md\"]},{\"text\":\"Java\",\"children\":[\"/view/note/Java/Java加密库的签名问题解决记录.md\",\"/view/note/Java/《疯狂JAVA讲义》学习笔记.md\",\"/view/note/Java/动力节点NIO学习笔记.md\"]},{\"text\":\"JavaScript\",\"children\":[]},{\"text\":\"Linux\",\"children\":[\"/view/note/Linux/SSH服务与VS连接失败解决方案.md\",\"/view/note/Linux/易道云-Linux系统命令.md\",\"/view/note/Linux/狂神说Linux.md\"]},{\"text\":\"Nodejs\",\"children\":[]},{\"text\":\"PHP\",\"children\":[]},{\"text\":\"Python\",\"children\":[]},{\"text\":\"React\",\"children\":[]},{\"text\":\"Rust\",\"children\":[]},{\"text\":\"Vue\",\"children\":[]},{\"text\":\"中间件\",\"children\":[\"/view/note/中间件/Docker学习笔记.md\",\"/view/note/中间件/Docker部署前后端项目.md\",\"/view/note/中间件/ElasticSearch学习笔记.md\",\"/view/note/中间件/Redis学习笔记.md\"]},{\"text\":\"其他\",\"children\":[\"/view/note/其他/CSDN转为Markdown.md\"]},{\"text\":\"反汇编\",\"children\":[\"/view/note/反汇编/栈溢出漏洞原理详解与利用.md\"]},{\"text\":\"安卓逆向\",\"children\":[\"/view/note/安卓逆向/FridaHook学习笔记.md\"]},{\"text\":\"易语言\",\"children\":[]},{\"text\":\"算法\",\"children\":[]},{\"text\":\"系统\",\"children\":[\"/view/note/系统/Windows Defender强制卸载.md\"]},{\"text\":\"网页逆向\",\"children\":[]}]},\"locales\":{\"/\":{\"selectLanguageName\":\"English\"}},\"colorMode\":\"auto\",\"colorModeSwitch\":true,\"repo\":null,\"selectLanguageText\":\"Languages\",\"selectLanguageAriaLabel\":\"Select language\",\"sidebarDepth\":2,\"editLink\":true,\"editLinkText\":\"Edit this page\",\"lastUpdated\":true,\"lastUpdatedText\":\"Last Updated\",\"contributors\":true,\"contributorsText\":\"Contributors\",\"notFound\":[\"There's nothing here.\",\"How did we get here?\",\"That's a Four-Oh-Four.\",\"Looks like we've got some broken links.\"],\"backToHome\":\"Take me home\",\"openInNewWindow\":\"open in new window\",\"toggleColorMode\":\"toggle color mode\",\"toggleSidebar\":\"toggle sidebar\"}")
-
-if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept()
-  if (__VUE_HMR_RUNTIME__.updateThemeData) {
-    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
-  }
-}
-
-if (import.meta.hot) {
-  import.meta.hot.accept(({ themeData }) => {
-    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
-  })
-}
