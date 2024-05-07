@@ -1,5 +1,13 @@
 export default [
-
+    {
+        name: '中国象棋AI',
+        description: '学棋打谱助手，同时也是个强大的连线外挂',
+        date: '2024-05-06',
+        language: 'C++',
+        imgs: [
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/chesss234325483548385.png'
+        ]
+    },
     {
         name: '英魂之刃PP脚本',
         description: 'RPG副本自动刷试炼打怪、自动做活动、签到、定时自动开机启动',
@@ -152,6 +160,16 @@ export default [
         imgs: [
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/QQ图片20220905103519.png',
             'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/QQ图片20220905103505.png'
+        ]
+    },
+    {
+        name: 'Yolo工具',
+        description: 'Yolo训练辅助快捷工具',
+        date: '2024-03-20',
+        language: 'C++',
+        imgs: [
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202405080025190.png',
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202405080024720.png'
         ]
     }
     ,
@@ -377,7 +395,7 @@ export default [
         date: '2023',
         language: '易语言',
         imgs: [
-            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20220509201501.png',
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/20220509201248.png',
         ]
     }
     ,

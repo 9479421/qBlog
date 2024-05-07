@@ -6,7 +6,7 @@
 - Java<el-progress :percentage="95" />
 - 易语言<el-progress :percentage="100"  />
 - Android<el-progress :percentage="60" />
-- C++<el-progress :percentage="80" />
+- C++<el-progress :percentage="95" />
 - 游戏外挂制作<el-progress :percentage="80"  />
 - 安卓/网页协议逆向<el-progress :percentage="100"  />
 - Web 前端<el-progress :percentage="90"  />
@@ -22,16 +22,18 @@
 
 **9年码龄，虚度光阴8年半**
 
-<span  style="font-size: 18px;font-weight: bold;color:red">初中、高中、大学均靠编程有过不菲的收入，曾一学期收入6位数🥴</span>
+<span style="font-size: 18px;font-weight: bold;color:red">初中、高中、大学均靠编程有过不菲的收入，曾多次一学期内收入6位数🥴</span>
 
-<!-- <font color='red'> 初中、高中、大学均靠编程有过不菲的收入，大一下学期曾收入6位数，且引以为傲</font> -->
+
+🥴<a style='color:rgb(231,82,128);font-size:28px;font-weight:bold' href="/view/work/">点这儿来看看我的作品</a>🥴
+
+
 
 **0 和 1 组成互联网，阴和阳构成大千世界，编程的过程等同于感悟创造起源的玄妙**
 
 **如果你对我的文章存有不同观点，那一定是你对了**
 
 **有编程爱好的朋友可以联系我交换友联**
-
 
 
 ## 🐱‍🐉 友情链接

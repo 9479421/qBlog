@@ -65,6 +65,7 @@
 <p>我们要根据显卡版本，安装GPU版本的torch</p>
 <p><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/image-20240313142534062.png" alt="image-20240313142534062"></p>
 <p>由此可见，可支持的最高CUDA版本为11.0，通过该网址https://pytorch.org/get-started/previous-versions/找到对应的pip安装命令。安装完GPU版本的torch问题就可以得到解决了。</p>
+<p>pip install torch==1.9.1+cu102 torchvision==0.10.1+cu102 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html</p>
 <p><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/image-20240313144008011.png" alt="image-20240313144008011"></p>
 <blockquote>
 <p>ImportError: DLL load failed while importing _ufuncs: 页面文件太小，无法完成操作。</p>

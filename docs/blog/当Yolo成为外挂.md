@@ -137,6 +137,8 @@ train和val分别对应训练图片集和验证图片集
 
 由此可见，可支持的最高CUDA版本为11.0，通过该网址https://pytorch.org/get-started/previous-versions/找到对应的pip安装命令。安装完GPU版本的torch问题就可以得到解决了。
 
+pip install torch==1.9.1+cu102 torchvision==0.10.1+cu102 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
+
 ![image-20240313144008011](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/image-20240313144008011.png)
 
 > ImportError: DLL load failed while importing _ufuncs: 页面文件太小，无法完成操作。
