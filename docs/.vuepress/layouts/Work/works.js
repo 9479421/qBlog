@@ -153,6 +153,17 @@ export default [
         ]
     },
     {
+        name: '欢乐斗地主',
+        description: '欢乐斗地主',
+        date: '2024.5.31',
+        language: 'C++、QT',
+        imgs: [
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202405310132802.png',
+            'https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202405310132082.png',
+
+        ]
+    },
+    {
         name: '图书馆抢座软件',
         description: '支持所有cx图书馆系统自动抢座',
         date: '2022.08.10',
