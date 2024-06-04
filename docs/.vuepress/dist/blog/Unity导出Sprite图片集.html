@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.8" />
+    <style>
+      :root {
+        --c-bg: #fff;
+      }
+      html.dark {
+        --c-bg: #22272e;
+      }
+      html,
+      body {
+        background-color: var(--c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme')
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+        document.documentElement.classList.toggle('dark', true)
+      }
+    </script>
+    <title>Unity导出Sprite图片集 | 不良人</title><meta name="description" content="My first VuePress Site">
+    <link rel="preload" href="/assets/style-BV2aNBet.css" as="style"><link rel="stylesheet" href="/assets/style-BV2aNBet.css">
+    <link rel="modulepreload" href="/assets/app-koVjN3rn.js"><link rel="modulepreload" href="/assets/Unity导出Sprite图片集.html-B4N8MwzX.js">
+    <link rel="prefetch" href="/assets/get-started.html-CWESbQWb.js" as="script"><link rel="prefetch" href="/assets/index.html-DkwUzXDe.js" as="script"><link rel="prefetch" href="/assets/C__实现微信自动跳一跳.html-CI9u4Zo1.js" as="script"><link rel="prefetch" href="/assets/C__手撸信号槽.html-DvpRdHU7.js" as="script"><link rel="prefetch" href="/assets/C__调用JS代码.html-CmUfTAIx.js" as="script"><link rel="prefetch" href="/assets/CloudFlare以及防DDOS策略详述.html-Dtu2Kn6x.js" as="script"><link rel="prefetch" href="/assets/Direct3D9入门绘制.html-CGN2i5ix.js" as="script"><link rel="prefetch" href="/assets/Dll调用内存bug解决.html-Drf_lFm-.js" as="script"><link rel="prefetch" href="/assets/NDK开发so调用so.html-DQU6YGwD.js" as="script"><link rel="prefetch" href="/assets/Onnxruntime Without Opencv.html-B0ftQV9N.js" as="script"><link rel="prefetch" href="/assets/OpenCv_CUDA实现Gpu加速.html-HfrZQykR.js" as="script"><link rel="prefetch" href="/assets/Surface使用体验与RD_frp搭建.html-Fb5b_5KS.js" as="script"><link rel="prefetch" href="/assets/TinyWebServer手撸记录.html-CXwnGyzW.js" as="script"><link rel="prefetch" href="/assets/X职通APP算法破解记录.html-D-6iSmYA.js" as="script"><link rel="prefetch" href="/assets/内层CALL追局部变量.html-CQnWIgsU.js" as="script"><link rel="prefetch" href="/assets/当Yolo成为外挂.html-DaP-wuXk.js" as="script"><link rel="prefetch" href="/assets/微信小程序逆向教程.html-SF3y3aWt.js" as="script"><link rel="prefetch" href="/assets/手机浏览器调试方法.html-DZzIYFsP.js" as="script"><link rel="prefetch" href="/assets/指定窗口句柄截图.html-BSsOp7q7.js" as="script"><link rel="prefetch" href="/assets/最低成本的方式搭建ChatGpt接口.html-C9GW4pbj.js" as="script"><link rel="prefetch" href="/assets/某付费文档网破解记录.html-UrZgaWqT.js" as="script"><link rel="prefetch" href="/assets/栈溢出漏洞分析.html-Bph30UK-.js" as="script"><link rel="prefetch" href="/assets/网游喊话加密Call分析.html-0-7OlI6c.js" as="script"><link rel="prefetch" href="/assets/网游链表数据遍历.html-DXWus2CR.js" as="script"><link rel="prefetch" href="/assets/index.html-CsdvkSxI.js" as="script"><link rel="prefetch" href="/assets/index.html-Dt5VxJYc.js" as="script"><link rel="prefetch" href="/assets/index.html-q4yb3btZ.js" as="script"><link rel="prefetch" href="/assets/index.html-wGb9bvUU.js" as="script"><link rel="prefetch" href="/assets/《第一行代码》学习笔记.html-BnsSEpt8.js" as="script"><link rel="prefetch" href="/assets/Linux服务器编程.html-CAmyYdV8.js" as="script"><link rel="prefetch" href="/assets/VS修改编码格式为UTF-8.html-bZUgWUV4.js" as="script"><link rel="prefetch" href="/assets/vs未能正确加载XX包的解决方法.html-COmpaA8t.js" as="script"><link rel="prefetch" href="/assets/易道云学习笔记.html-DyVlnlpv.js" as="script"><link rel="prefetch" href="/assets/Git学习笔记.html-D7J2b0NF.js" as="script"><link rel="prefetch" href="/assets/Java加密库的签名问题解决记录.html-CDqt4vWe.js" as="script"><link rel="prefetch" href="/assets/《疯狂JAVA讲义》学习笔记.html-BUnKU26K.js" as="script"><link rel="prefetch" href="/assets/动力节点NIO学习笔记.html-DGQe3fg6.js" as="script"><link rel="prefetch" href="/assets/SSH服务与VS连接失败解决方案.html-Kh8cFWSf.js" as="script"><link rel="prefetch" href="/assets/易道云-Linux系统命令.html-CxSxyn-A.js" as="script"><link rel="prefetch" href="/assets/狂神说Linux.html-BYLE9va-.js" as="script"><link rel="prefetch" href="/assets/Docker学习笔记.html-YPgoZBda.js" as="script"><link rel="prefetch" href="/assets/Docker部署前后端项目.html-CocXAf1W.js" as="script"><link rel="prefetch" href="/assets/ElasticSearch学习笔记.html-DsEReqEX.js" as="script"><link rel="prefetch" href="/assets/Redis学习笔记.html-B2rs9_XL.js" as="script"><link rel="prefetch" href="/assets/CSDN转为Markdown.html-IUY_y1wY.js" as="script"><link rel="prefetch" href="/assets/栈溢出漏洞原理详解与利用.html-CpLk3Fzc.js" as="script"><link rel="prefetch" href="/assets/FridaHook学习笔记.html-DACchR4h.js" as="script"><link rel="prefetch" href="/assets/Windows Defender强制卸载.html-5fPZPF6c.js" as="script"><link rel="prefetch" href="/assets/404.html-B8yAn93Z.js" as="script"><link rel="prefetch" href="/assets/index.html-CeRcbTBX.js" as="script"><link rel="prefetch" href="/assets/Friend-C03PaQUN.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme-container no-sidebar"><!--[--><header class="navbar"><div class="toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a class="route-link" href="/"><img class="logo" src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/b_9523abbb426ea0c8a21b2754fdc52300.jpg" alt="不良人"><span class="site-name can-hide" aria-hidden="true">不良人</span></a></span><div class="navbar-items-wrapper" style=""><!--[--><!--]--><nav class="navbar-items can-hide" aria-label="site navigation"><!--[--><div class="navbar-item"><a class="route-link" href="/" aria-label="主页"><!--[--><!--]--> 主页 <!--[--><!--]--></a></div><div class="navbar-item"><div class="navbar-dropdown-wrapper"><button class="navbar-dropdown-title" type="button" aria-label="学习"><span class="title">学习</span><span class="arrow down"></span></button><button class="navbar-dropdown-title-mobile" type="button" aria-label="学习"><span class="title">学习</span><span class="right arrow"></span></button><ul style="display:none;" class="navbar-dropdown"><!--[--><li class="navbar-dropdown-item"><a class="route-link" href="/view/note/" aria-label="学习笔记"><!--[--><!--]--> 学习笔记 <!--[--><!--]--></a></li><!--]--></ul></div></div><div class="navbar-item"><a class="route-link" href="/view/pigeonhole/" aria-label="归档"><!--[--><!--]--> 归档 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/view/work/" aria-label="作品"><!--[--><!--]--> 作品 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/view/about/" aria-label="关于"><!--[--><!--]--> 关于 <!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button class="toggle-color-mode-button" title="toggle color mode"><svg style="" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg style="display:none;" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><!----></div></header><!--]--><div class="sidebar-mask"></div><!--[--><aside class="sidebar"><nav class="navbar-items" aria-label="site navigation"><!--[--><div class="navbar-item"><a class="route-link" href="/" aria-label="主页"><!--[--><!--]--> 主页 <!--[--><!--]--></a></div><div class="navbar-item"><div class="navbar-dropdown-wrapper"><button class="navbar-dropdown-title" type="button" aria-label="学习"><span class="title">学习</span><span class="arrow down"></span></button><button class="navbar-dropdown-title-mobile" type="button" aria-label="学习"><span class="title">学习</span><span class="right arrow"></span></button><ul style="display:none;" class="navbar-dropdown"><!--[--><li class="navbar-dropdown-item"><a class="route-link" href="/view/note/" aria-label="学习笔记"><!--[--><!--]--> 学习笔记 <!--[--><!--]--></a></li><!--]--></ul></div></div><div class="navbar-item"><a class="route-link" href="/view/pigeonhole/" aria-label="归档"><!--[--><!--]--> 归档 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/view/work/" aria-label="作品"><!--[--><!--]--> 作品 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/view/about/" aria-label="关于"><!--[--><!--]--> 关于 <!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><!----><!--[--><!--]--></aside><!--]--><!--[--><main class="page"><!--[--><!--]--><div class="theme-default-content"><!--[--><!--]--><div><h1 id="unity导出sprite图片集" tabindex="-1"><a class="header-anchor" href="#unity导出sprite图片集"><span>Unity导出Sprite图片集</span></a></h1><blockquote><h4 id="转载" tabindex="-1"><a class="header-anchor" href="#转载"><span>转载</span></a></h4></blockquote><h4 id="一、前言" tabindex="-1"><a class="header-anchor" href="#一、前言"><span>一、前言</span></a></h4><p>有时候，我们需要将一张大图分离成多张小图单独保存成文件。比如下面这张图，我只想要第一只小鸟的图。<br><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202406042356377.png" alt="在这里插入图片描述"><br> 我们可以利用<code>Unity</code>的<code>TextureImporter</code>类的<code>spritesheet</code>成员获取到每个小图的信息，然后再分别保存成小图文件即可。</p><h4 id="二、操作步骤" tabindex="-1"><a class="header-anchor" href="#二、操作步骤"><span>二、操作步骤</span></a></h4><h5 id="_1、图片格式设置" tabindex="-1"><a class="header-anchor" href="#_1、图片格式设置"><span>1、图片格式设置</span></a></h5><p>将图片导入<code>Unity</code>中，格式设置为<code>Sprite (2D and UI)</code>，将<code>Sprite Mode</code>设置为<code>Multiple</code>，点击<code>Apply</code>。<br><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202406042357123.png" alt="在这里插入图片描述"></p><h5 id="_2、slice切割" tabindex="-1"><a class="header-anchor" href="#_2、slice切割"><span>2、<a href="https://so.csdn.net/so/search?q=Slice&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">Slice<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a>切割</span></a></h5><p>点击<code>Sprite Editor</code>，<br><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202406042357082.png" alt="在这里插入图片描述"><br> 点击<code>Slice</code>下拉按钮，根据实际情况设置切割模式，比如这张鸟图直接设置<code>Automatic</code>即可，然后点击<code>Slice</code>按钮。<br><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202406042357348.png" alt="在这里插入图片描述"><br> 切割成功后，点击<code>Apply</code>保存。<br><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202406042357604.png" alt="在这里插入图片描述"></p><h5 id="_3、splittexture脚本" tabindex="-1"><a class="header-anchor" href="#_3、splittexture脚本"><span>3、SplitTexture脚本</span></a></h5><p>将下面的代码保存为<code>SplitTexture.cs</code>，放在<code>Editor</code>文件夹中。<br><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202406042357792.png" alt="在这里插入图片描述"><br><code>SplitTexture.cs</code>代码如下：</p><div class="language-c# line-numbers-mode" data-ext="c#" data-title="c#"><pre class="language-c#"><code>// SplitTexture.cs
+
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+
+/// &lt;summary&gt;
+/// 将图片分离成多张小图
+/// &lt;/summary&gt;
+public class SplitTexture
+{
+    [MenuItem(&quot;Tools/SplitTexture&quot;)]
+    static void DoSplitTexture()
+    {
+        // 获取所选图片
+        Texture2D selectedImg = Selection.activeObject as Texture2D;
+        string rootPath = Path.GetDirectoryName(AssetDatabase.GetAssetPath(selectedImg));
+        string path = rootPath + &quot;/&quot; + selectedImg.name + &quot;.png&quot;;
+        TextureImporter texImp = AssetImporter.GetAtPath(path) as TextureImporter;
+        // 设置为可读
+        texImp.isReadable = true;
+        AssetDatabase.ImportAsset(path);
+
+        // 创建文件夹
+        AssetDatabase.CreateFolder(rootPath, selectedImg.name);
+        
+        foreach (SpriteMetaData metaData in texImp.spritesheet)
+        {
+            var width = (int)metaData.rect.width;
+            var height = (int)metaData.rect.height;
+            Texture2D smallImg = new Texture2D(width, height);
+            var pixelStartX = (int)metaData.rect.x;
+            var pixelEndX = pixelStartX + width;
+            var pixelStartY = (int)metaData.rect.y;
+            var pixelEndY = pixelStartY + height;
+            for (int x = pixelStartX; x &lt;= pixelEndX; ++x)
+            {
+                for (int y = pixelStartY; y &lt;= pixelEndY; ++y)
+                {
+                    smallImg.SetPixel(x - pixelStartX, y - pixelStartY, selectedImg.GetPixel(x, y));
+                }
+            }
+
+            //  转换纹理到EncodeToPNG兼容格式
+            if (TextureFormat.ARGB32 != smallImg.format  &amp;&amp; TextureFormat.RGB24 != smallImg.format)
+            {
+                Texture2D img = new Texture2D(smallImg.width, smallImg.height);
+                img.SetPixels(smallImg.GetPixels(0), 0);
+                smallImg = img;
+            }
+
+            // 保存小图文件
+            string smallImgPath = rootPath + &quot;/&quot; + selectedImg.name + &quot;/&quot; + metaData.name + &quot;.png&quot;;
+            File.WriteAllBytes(smallImgPath, smallImg.EncodeToPNG());
+            // 刷新资源窗口界面
+            AssetDatabase.Refresh();
+            // 设置小图的格式
+            TextureImporter smallTextureImp = AssetImporter.GetAtPath(smallImgPath) as TextureImporter;
+            // 设置为可读
+            smallTextureImp.isReadable = true;
+            // 设置alpha通道
+            smallTextureImp.alphaIsTransparency = true;
+            // 不开启mipmap
+            smallTextureImp.mipmapEnabled = false;
+            AssetDatabase.ImportAsset(smallImgPath);
+        }
+    }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h5 id="_4、执行菜单命令" tabindex="-1"><a class="header-anchor" href="#_4、执行菜单命令"><span>4、执行菜单命令</span></a></h5><p>选中要分割的大图，<br><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202406042357487.png" alt="在这里插入图片描述"><br> 点击菜单<code>Tools / SplitTexture</code>，<br><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202406042357056.png" alt="在这里插入图片描述"><br> 此时就会在大图同级目录下生成一个同名的文件夹，分离的小图就会保存在这个文件夹中。<br><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202406042357766.png" alt="在这里插入图片描述"></p><h4 id="三、结束" tabindex="-1"><a class="header-anchor" href="#三、结束"><span>三、结束</span></a></h4><p>这样，我们就得到了我们想要的小图了。<br><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202406042358048.png" alt="在这里插入图片描述"></p></div><!--[--><!--]--></div><footer class="page-meta"><!----><!----><!----></footer><!----><!--[--><!--]--></main><!--]--></div><!--[--><!----><!--]--><!--]--></div>
+    <script type="module" src="/assets/app-koVjN3rn.js" defer></script>
+  </body>
+</html>
