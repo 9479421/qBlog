@@ -88,4 +88,17 @@ parser.add_argument('--max-wh', type=int, default=None, help='None for tensorrt 
 
 ![image-20240510022050234](https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202405100220273.png)
 
-开源地址：https://github.com/9479421/EasyOnnxruntime
+
+
+开源地址(CPP)：https://github.com/9479421/EasyOnnxruntime
+
+另外还实现了一个Java版的OnnxRuntime Yolov7调用
+
+开源地址(Java)：https://github.com/9479421/EasyOnnxruntime_Java
+
+
+
+
+
+
+

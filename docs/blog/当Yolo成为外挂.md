@@ -146,9 +146,3 @@ pip install torch==1.9.1+cu102 torchvision==0.10.1+cu102 torchaudio==0.9.1 -f ht
 parser.add_argument('--workers', type=int, default=4, help='maximum number of dataloader workers')
 
 将多进程改成单进程(default=0)即可
-
-> CUDA out of memory. Tried to allocate 2.05 GiB (GPU 0; 6.00 GiB total capacity; 531.78 MiB already allocated; 2.05 GiB free; 2.23 GiB reserved in total by PyTorch)
-
-parser.add_argument('--batch-size', type=int, default=16, help='total batch size for all GPUs')
-
-减小--batch-size(default=1)

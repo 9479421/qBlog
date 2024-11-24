@@ -50,7 +50,9 @@ std<span class="token operator">::</span>vector<span class="token operator">&lt;
 </blockquote>
 <p>最后，我将Gdiplus+OnnxRuntime封装成了一个类库，以便快捷使用。</p>
 <p><img src="https://wqby-1304194722.cos.ap-nanjing.myqcloud.com/img/202405100220273.png" alt="image-20240510022050234"></p>
-<p>开源地址：https://github.com/9479421/EasyOnnxruntime</p>
+<p>开源地址(CPP)：https://github.com/9479421/EasyOnnxruntime</p>
+<p>另外还实现了一个Java版的OnnxRuntime Yolov7调用</p>
+<p>开源地址(Java)：https://github.com/9479421/EasyOnnxruntime_Java</p>
 </div></template>
 
 
